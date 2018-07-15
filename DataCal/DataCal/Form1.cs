@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using System.Diagnostics;
 
 namespace DataCal
 {
@@ -57,10 +58,15 @@ namespace DataCal
             return returnStr;
         }
 
-        public void showMessage(string tempstr) 
+        public void showMessage(string tempstr)
         {
-            richTextBox1.Text += tempstr;
-            richTextBox1.Text += "\n";
+            try
+            {
+                richTextBox1.Text += tempstr;
+                richTextBox1.Text += "\n";
+            }
+            catch { }
+            
         }
 
         public int calcrc(byte[] data,int initvalue,int len)
@@ -103,9 +109,9 @@ namespace DataCal
                     databufflen += 16;    
                 }
             }
-            finally 
+            catch 
             {
-                //showMessage("读取缓存区数据错误");
+                showMessage("读取缓存区数据错误");
             }
         }
 
@@ -122,7 +128,7 @@ namespace DataCal
             byte[] bytedata;
             int addr;
 
-
+            //Debug.WriteLine("Ypf");
             openFileDialog1.Filter = "hex files (*.hex;*.bin)|*.bin;*.hex|All files (*.*)|*.*";
             openFileDialog1.ShowDialog();
             filename = openFileDialog1.FileName;
@@ -205,9 +211,9 @@ namespace DataCal
                     dataGridView1[1, i].Value = tempstr;
                 }
             }
-            finally
+            catch
             {
-                //showMessage("打开文件失败");
+                showMessage("打开文件失败");
             }
             
          }
@@ -226,8 +232,9 @@ namespace DataCal
             string tempstr;
             try 
             {
-                updatedatabuff();
                 
+                updatedatabuff();
+                 
                 endaddrbytes=strToHexByte(textBox2.Text);
                 initvaluebytes=strToHexByte(textBox1.Text);
                 initvalue=(int)initvaluebytes[1] + (int)initvaluebytes[0] * 256;
@@ -236,10 +243,11 @@ namespace DataCal
                 tempstr = "CRC初始值：" + initvalue.ToString("X8")+"\n";
                 tempstr += "CRC计算长度：" + len.ToString("X8") + "\n";
                 tempstr += "CRC计算结果：" + crcvalue.ToString("X8");
-                showMessage(tempstr);       
+                showMessage(tempstr);
+               
             }
-            finally {
-                //showMessage("CRC计算错误");
+            catch {
+                showMessage("CRC计算错误");
             }
         }
 
@@ -251,6 +259,77 @@ namespace DataCal
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                richTextBox1.Text = "";
+            }
+            catch 
+            {
+                showMessage("清除消息失败");
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string filename;
+            string hexending = ":00000001FF\n";
+            string hexheading = ":020000040000FA";
+            int i, j;
+            string tempstr;
+            byte tempbyte;
+            byte[] bytebuf = new byte[16];
+            try
+            {
+                saveFileDialog1.InitialDirectory = Application.StartupPath;
+                saveFileDialog1.Filter = "hex files (*.hex)|*.hex|bin files(*.bin)|*.bin|All files (*.*)|*.*";
+                saveFileDialog1.ShowDialog();
+                filename = saveFileDialog1.FileName;
+                if (saveFileDialog1.FilterIndex == 0x02)  //bin
+                {
+                    updatedatabuff();
+                    FileStream fs = File.Create(filename);
+                    fs.Write(databuff, 0, databufflen);
+                    fs.Close();
+                }
+                else
+                {                  
+                    //计算第一行校验码
+                    hexheading = ":02000004" + dataGridView1[0, 1].Value.ToString().Substring(0, 4);
+                    tempbyte=Convert.ToByte(dataGridView1[0, 1].Value.ToString().Substring(0, 2), 16);
+                    tempbyte+= Convert.ToByte(dataGridView1[0, 1].Value.ToString().Substring(2, 2), 16);
+                    tempbyte = (byte)(0xFA - tempbyte);
+                    hexheading += tempbyte.ToString("X2");
+                    hexheading += "\n";
+                    File.WriteAllText(filename, hexheading);
+                    for (i = 0; i < dataGridView1.RowCount; i++) 
+                    {
+                        tempstr=dataGridView1[1, i].Value.ToString();
+                        tempstr = DeleteSpaceString(tempstr);
+                        bytebuf = strToHexByte(tempstr);
+                        tempbyte=0;
+                        for (j = 0; j < 16; j++) 
+                        {
+                            tempbyte += bytebuf[j];
+                        }
+                        tempbyte += (byte)(0x10 + (byte)(i * 16) + (byte)((i * 16) >> 8));
+                        tempbyte = (byte)(0x100 - tempbyte);
+                        tempstr =":10" +i.ToString("X4")+ "00"+tempstr + tempbyte.ToString("X2");
+                        tempstr += "\n";
+                        File.AppendAllText(filename, tempstr);
+                    }
+                    //写入最后一行
+                    File.AppendAllText(filename, hexending);
+               }
+                showMessage("保存文档成功："+filename);
+           }
+            catch
+            {
+                showMessage("保持文档失败!");
+            }
         }
         
         
