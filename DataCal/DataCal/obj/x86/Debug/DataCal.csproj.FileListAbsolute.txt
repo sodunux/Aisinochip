@@ -6,3 +6,11 @@ C:\Users\sodunux\Documents\Github\Aisinochip\DataCal\DataCal\obj\x86\Debug\DataC
 C:\Users\sodunux\Documents\Github\Aisinochip\DataCal\DataCal\obj\x86\Debug\DataCal.exe
 C:\Users\sodunux\Documents\Github\Aisinochip\DataCal\DataCal\obj\x86\Debug\DataCal.pdb
 C:\Users\sodunux\Documents\Github\Aisinochip\DataCal\DataCal\obj\x86\Debug\DataCal.DataCal.resources
+E:\Github\Aisinochip\DataCal\DataCal\obj\x86\Debug\DataCal.exe
+E:\Github\Aisinochip\DataCal\DataCal\obj\x86\Debug\DataCal.pdb
+E:\Github\Aisinochip\DataCal\DataCal\bin\Debug\DataCal.exe
+E:\Github\Aisinochip\DataCal\DataCal\bin\Debug\DataCal.pdb
+E:\Github\Aisinochip\DataCal\DataCal\obj\x86\Debug\DataCal.csprojResolveAssemblyReference.cache
+E:\Github\Aisinochip\DataCal\DataCal\obj\x86\Debug\DataCal.DataCal.resources
+E:\Github\Aisinochip\DataCal\DataCal\obj\x86\Debug\DataCal.Properties.Resources.resources
+E:\Github\Aisinochip\DataCal\DataCal\obj\x86\Debug\DataCal.csproj.GenerateResource.Cache

@@ -33,6 +33,7 @@
             this.maintab = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.button1 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.OpenFileBtn = new System.Windows.Forms.Button();
@@ -41,6 +42,9 @@
             this.CrcBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.EE_Addr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EE_Data = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,8 +53,6 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.maintab.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -103,6 +105,17 @@
             this.splitContainer1.SplitterDistance = 180;
             this.splitContainer1.TabIndex = 0;
             // 
+            // button1
+            // 
+            this.button1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.button1.Location = new System.Drawing.Point(0, 183);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(180, 26);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "清除消息";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // richTextBox1
             // 
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -124,15 +137,17 @@
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label2, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.button2, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.button3, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.textBox3, 1, 4);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 5;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75.40984F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.59016F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 47F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 21F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 52F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(180, 183);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
@@ -154,7 +169,8 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(76, 21);
             this.textBox1.TabIndex = 3;
-            this.textBox1.Text = "6363";
+            this.textBox1.Text = "FFFF";
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // textBox2
             // 
@@ -196,6 +212,37 @@
             this.label2.Size = new System.Drawing.Size(92, 18);
             this.label2.TabIndex = 6;
             this.label2.Text = "EndAddr";
+            // 
+            // button2
+            // 
+            this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button2.Location = new System.Drawing.Point(85, 105);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(92, 46);
+            this.button2.TabIndex = 7;
+            this.button2.Text = "保存文件";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button3.Location = new System.Drawing.Point(3, 157);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(76, 23);
+            this.button3.TabIndex = 8;
+            this.button3.Text = "字节取反";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // textBox3
+            // 
+            this.textBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox3.Location = new System.Drawing.Point(85, 157);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(92, 21);
+            this.textBox3.TabIndex = 9;
+            this.textBox3.Text = "FF";
             // 
             // dataGridView1
             // 
@@ -246,28 +293,6 @@
             this.printPreviewDialog1.Name = "printPreviewDialog1";
             this.printPreviewDialog1.Visible = false;
             // 
-            // button1
-            // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button1.Location = new System.Drawing.Point(0, 183);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(180, 26);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "清除消息";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
-            // button2
-            // 
-            this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button2.Location = new System.Drawing.Point(85, 117);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(92, 41);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "保存文件";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // DataCal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -316,6 +341,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.TextBox textBox3;
     }
 }
 

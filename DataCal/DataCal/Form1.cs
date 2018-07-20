@@ -331,6 +331,39 @@ namespace DataCal
                 showMessage("保持文档失败!");
             }
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            byte temp;
+            string tempstr="";
+            string inputstr;
+            int i = 0;
+            try {
+                if ((DeleteSpaceString(textBox3.Text).Length % 2) == 1)
+                    showMessage("字节长度有误");
+                else 
+                {
+                    inputstr=DeleteSpaceString(textBox3.Text);
+                    showMessage("输入长度为："+(inputstr.Length/2).ToString("X6"));
+                    for (i = 0; i < (inputstr.Length / 2); i++)
+                    {
+                        temp = Convert.ToByte(inputstr.Substring(i * 2, 2), 16);
+                        temp = (byte)(~temp);
+                        tempstr += temp.ToString("X2");
+                    }
+                    textBox3.Text = tempstr;
+                }
+
+
+
+            }
+            catch { showMessage("字节取反失败"); }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
         
         
 
